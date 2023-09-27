@@ -1,12 +1,20 @@
-import _ from 'lodash';
+const sliders = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dots');
+const prev =document.querySelector('.prev');
+const next =document.querySelector('.next');
 
-function component() {
-	const element = document.createElement('div');
-  
-	element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-	element.classList.add('hello');
-  
-	return element;
+console.log('hi');
+let initialValue = 1;
+change(0);
+
+function change(n){
+	initialValue += n;
+	for (let i=0; i<sliders.length; i++){
+		sliders[i].style.display = 'none';
+	}
+	sliders[initialValue].style.display = 'block';
+	dots[initialValue].className += 'active';
 }
-  
-document.body.appendChild(component());
+
+prev.addEventListener('click', change(-1));
+next.addEventListener('click', change(1));
